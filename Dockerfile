@@ -10,7 +10,7 @@ RUN \
         gdebi \
         libxslt1.1 \
   \
-    && RSTUDIO_VERSION=1.1.453 \
+    && RSTUDIO_VERSION=1.1.456 \
     && curl https://download1.rstudio.org/rstudio-xenial-${RSTUDIO_VERSION}-amd64.deb -o rstudio.deb \
   \
     && gdebi -n rstudio.deb \
