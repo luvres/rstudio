@@ -1,4 +1,6 @@
+#FROM arm32v7/debian:stretch-slim
 FROM arm32v7/ubuntu:xenial
+
 MAINTAINER Leonardo Loures <luvres@hotmail.com>
 
 # sudo apt-get install qemu-user-static binfmt-support
@@ -26,7 +28,7 @@ RUN \
 RUN \
   # Download RStudio source
   # Set RStudio version
-	VERS='v1.1.447' \
+	VERS='v1.1.423' \
 	&& cd /tmp \
 	&& wget "https://github.com/rstudio/rstudio/tarball/${VERS}" \
 	&& mkdir "rstudio-$VERS" \
@@ -37,21 +39,21 @@ RUN \
 	&& cd rstudio-$VERS/dependencies/linux \
 	&& sed -i 's/sudo//' ./install-dependencies-debian \
 	&& sed -i 's/sudo//' ../common/install-boost \
-	&& ./install-dependencies-debian 
-#  \
-#  # Configure cmake and build RStudio
-#	&& cd "/tmp/rstudio-$VERS/" \
-#	&& mkdir build \
-#	&& cd build \
-#	&& cmake .. \
-#			-DRSTUDIO_TARGET=Desktop \
-#			-DCMAKE_BUILD_TYPE=Release \
-#  \
-#	&& PKG_VERS=$(echo "${VERS}" | sed 's/^v//') \
-#	&& checkinstall --pkgname rstudio --pkgversion "${PKG_VERS}" -y \
-#  \
-#  # Clean the system of packages used for building
-#	&& cd /tmp \
-#	&& rm -rf "rstudio-$VERS"
+	&& ./install-dependencies-debian \
+  \
+  # Configure cmake and build RStudio
+	&& cd "/tmp/rstudio-$VERS/" \
+	&& mkdir build \
+	&& cd build \
+	&& cmake .. \
+			-DRSTUDIO_TARGET=Desktop \
+			-DCMAKE_BUILD_TYPE=Release \
+  \
+	&& PKG_VERS=$(echo "${VERS}" | sed 's/^v//') \
+	&& checkinstall --pkgname rstudio --pkgversion "${PKG_VERS}" -y \
+  \
+  # Clean the system of packages used for building
+	&& cd /tmp \
+	&& rm -rf "rstudio-$VERS"
 
 WORKDIR /root
