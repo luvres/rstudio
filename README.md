@@ -12,7 +12,7 @@
 
 -----
 
-## RStudio IDE 1.1.456
+## RStudio IDE 1.1.456 (OLD)
 #### Create a directory for rstudio and Include above on flag "-v"
 ```
 mkdir $HOME/rstudio
